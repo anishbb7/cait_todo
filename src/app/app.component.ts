@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
   deletingId: number | string | null = null;
 
   ngOnInit(): void {
-    // TODO: this.todoService.getAll().subscribe(todos => this.todos = todos);
+    // TODO: GET Request for all tasks
     this.todos = [...MOCK_TODOS];
   }
 
@@ -167,7 +167,7 @@ export class AppComponent implements OnInit {
         createdAt: new Date(),
         updatedAt: new Date(),
       };
-      // TODO: this.todoService.create({title, note}).subscribe(t => this.todos.unshift(t));
+      // TODO: POST Request to save a new task
       this.todos.unshift(created);
       this.selectedId = created.id;
       this.panelMode  = 'edit';
@@ -176,7 +176,7 @@ export class AppComponent implements OnInit {
     } else if (this.selectedId !== null) {
       const idx = this.todos.findIndex(t => t.id === this.selectedId);
       if (idx > -1) {
-        // TODO: this.todoService.update(id, {title, note}).subscribe(t => this.todos[idx] = t);
+        // TODO: PUT request to update an existing task
         this.todos[idx] = {
           ...this.todos[idx],
           title,
@@ -211,7 +211,7 @@ export class AppComponent implements OnInit {
 
   deleteConfirmed(todo: Todo, event: Event): void {
     event.stopPropagation();
-    // TODO: this.todoService.delete(todo.id).subscribe(() => { ... });
+    // TODO: DELETE request to delete a task
     this.todos = this.todos.filter(t => t.id !== todo.id);
     if (this.selectedId === todo.id) this.closePanel();
     this.deletingId = null;
