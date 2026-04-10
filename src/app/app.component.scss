@@ -31,7 +31,7 @@
 }
 
 .app-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display),serif;
   font-size: 26px;
   font-weight: 600;
   letter-spacing: -0.4px;
@@ -43,7 +43,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: #7a5500;
@@ -78,7 +78,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 12.5px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -157,10 +157,6 @@
       text-decoration: line-through;
       color: var(--text-tertiary);
     }
-  }
-
-  &.is-deleting {
-    background: #fff0f0;
   }
 }
 
@@ -276,13 +272,13 @@
   flex: 1;
 }
 
-.delete-btns {
+.delete-buttons {
   display: flex;
   gap: 6px;
 }
 
 .del-yes, .del-no {
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 12px;
   font-weight: 600;
   padding: 5px 10px;
@@ -350,15 +346,10 @@
 }
 
 .idle-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display),serif;
   font-size: 20px;
   font-weight: 500;
   color: var(--text-secondary);
-}
-
-.idle-sub {
-  font-size: 13.5px;
-  color: var(--text-tertiary);
 }
 
 .idle-new-btn {
@@ -366,7 +357,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 13.5px;
   font-weight: 600;
   color: #7a5500;
@@ -405,7 +396,7 @@
 }
 
 .panel-mode-label {
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -431,7 +422,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 13px;
   font-weight: 600;
   border: none;
@@ -506,7 +497,7 @@
   width: 100%;
   border: none;
   background: transparent;
-  font-family: var(--font-display);
+  font-family: var(--font-display),serif;
   font-size: 26px;
   font-weight: 600;
   color: var(--text-primary);
@@ -534,7 +525,7 @@
   width: 100%;
   border: none;
   background: transparent;
-  font-family: var(--font-body);
+  font-family: var(--font-body), sans-serif;
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-secondary);
