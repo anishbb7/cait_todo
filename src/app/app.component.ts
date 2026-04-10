@@ -6,7 +6,6 @@ import {
 } from '@angular/animations';
 import { Todo } from './todo.model';
 
-// ── Mock placeholder data ──────────────────────────────────────────────
 const MOCK_TODOS: Todo[] = [
   {
     id: 1,
@@ -92,8 +91,6 @@ export class AppComponent implements OnInit {
     this.todos = [...MOCK_TODOS];
   }
 
-  // ── Derived ────────────────────────────────────────────────────────
-
   get filteredTodos(): Todo[] {
     if (this.filter === 'active') return this.todos.filter(t => !t.completed);
     if (this.filter === 'done')   return this.todos.filter(t =>  t.completed);
@@ -108,16 +105,12 @@ export class AppComponent implements OnInit {
     return this.todos.find(t => t.id === this.selectedId) ?? null;
   }
 
-  // ── Filter ──────────────────────────────────────────────────────────
-
   setFilter(f: Filter): void {
     this.filter = f;
     if (this.selectedId && !this.filteredTodos.find(t => t.id === this.selectedId)) {
       this.closePanel();
     }
   }
-
-  // ── Select / Panel ──────────────────────────────────────────────────
 
   selectTodo(todo: Todo): void {
     if (this.deletingId === todo.id) return;
@@ -150,8 +143,6 @@ export class AppComponent implements OnInit {
     this.panelDirty = true;
     this.panelError = '';
   }
-
-  // ── Save ────────────────────────────────────────────────────────────
 
   savePanel(): void {
     const title = this.panelTitle.trim();
@@ -187,16 +178,12 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // ── Toggle ──────────────────────────────────────────────────────────
-
   toggleComplete(todo: Todo, event: Event): void {
     event.stopPropagation();
     // TODO: PATCH request to mark the task as completed
     todo.completed  = !todo.completed;
     todo.updatedAt  = new Date();
   }
-
-  // ── Delete ──────────────────────────────────────────────────────────
 
   confirmDelete(id: number | string, event: Event): void {
     event.stopPropagation();
@@ -215,8 +202,6 @@ export class AppComponent implements OnInit {
     if (this.selectedId === todo.id) this.closePanel();
     this.deletingId = null;
   }
-
-  // ── Helpers ─────────────────────────────────────────────────────────
 
   formatDate(date?: string | Date): string {
     if (!date) return '';
