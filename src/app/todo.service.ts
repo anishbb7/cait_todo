@@ -8,7 +8,6 @@ import { Todo, CreateTodoDto, UpdateTodoDto } from './todo.model';
   providedIn: 'root'
 })
 export class TodoService {
-  // ← Change this to your API base URL
   private readonly API_URL = 'http://localhost:3000/api/todos';
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -29,14 +28,14 @@ export class TodoService {
     );
   }
 
-  /** PATCH /api/todos/:id — update title or note */
+  /** PATCH /api/todos/:id — update a task */
   update(id: number | string, dto: UpdateTodoDto): Observable<Todo> {
     return this.http.patch<Todo>(`${this.API_URL}/${id}`, dto, { headers: this.headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  /** PATCH /api/todos/:id — toggle completed flag */
+  /** PATCH /api/todos/:id — push completed flag to backend */
   toggleComplete(id: number | string, completed: boolean): Observable<Todo> {
     return this.http.patch<Todo>(
       `${this.API_URL}/${id}`,
@@ -47,7 +46,7 @@ export class TodoService {
     );
   }
 
-  /** DELETE /api/todos/:id — remove a task */
+  /** DELETE /api/todos/:id — delete a task */
   delete(id: number | string): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}`).pipe(
       catchError(this.handleError)
