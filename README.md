@@ -1,7 +1,7 @@
 # Notes — Angular To-Do App
 
 An iPhone Notes-inspired task manager built with Angular 17.
-
+![img.png](img.png)
 ## Quick Start
 
 ```bash
@@ -55,7 +55,6 @@ private readonly API_URL = 'http://localhost:3000/api/todos';
 - **Mark complete** via the circular checkbox (optimistic update)
 - **Delete task** via the trash icon → inline confirmation
 - **Filter** by All / Active / Done tabs
-- **Search** by title or note (local filter)
 - Smooth Angular animations on list/modal transitions
 - Skeleton loading state
 - Error display in modal on API failure
