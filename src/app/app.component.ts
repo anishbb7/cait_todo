@@ -47,29 +47,30 @@ export type Filter    = 'all' | 'active' | 'done';
 export type PanelMode = 'idle' | 'create' | 'edit';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    trigger('listItem', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(8px)' }),
-        animate('200ms cubic-bezier(0.4,0,0.2,1)', style({ opacity: 1, transform: 'translateY(0)' }))
-      ]),
-      transition(':leave', [
-        animate('160ms cubic-bezier(0.4,0,0.2,1)', style({ opacity: 0, transform: 'translateX(-12px)' }))
-      ])
-    ]),
-    trigger('panelFade', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(20px)' }),
-        animate('240ms cubic-bezier(0.4,0,0.2,1)', style({ opacity: 1, transform: 'translateX(0)' }))
-      ]),
-      transition(':leave', [
-        animate('160ms ease', style({ opacity: 0, transform: 'translateX(10px)' }))
-      ])
-    ])
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    animations: [
+        trigger('listItem', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(8px)' }),
+                animate('200ms cubic-bezier(0.4,0,0.2,1)', style({ opacity: 1, transform: 'translateY(0)' }))
+            ]),
+            transition(':leave', [
+                animate('160ms cubic-bezier(0.4,0,0.2,1)', style({ opacity: 0, transform: 'translateX(-12px)' }))
+            ])
+        ]),
+        trigger('panelFade', [
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateX(20px)' }),
+                animate('240ms cubic-bezier(0.4,0,0.2,1)', style({ opacity: 1, transform: 'translateX(0)' }))
+            ]),
+            transition(':leave', [
+                animate('160ms ease', style({ opacity: 0, transform: 'translateX(10px)' }))
+            ])
+        ])
+    ],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   @ViewChild('panelTitleInput') panelTitleInput!: ElementRef<HTMLTextAreaElement>;
