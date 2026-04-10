@@ -1,0 +1,211 @@
+<div class="workspace">
+
+  <!-- ══════════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+
+    <!-- Sidebar header -->
+    <div class="sidebar-header">
+      <div class="sidebar-top">
+        <h1 class="app-title">Notes</h1>
+        <button class="new-btn" (click)="openCreate()" title="New task (⌘N)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          New Task
+        </button>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-tabs">
+        <button class="tab" [class.active]="filter === 'all'"    (click)="setFilter('all')">
+          All
+          <span class="tab-pill">{{ todos.length }}</span>
+        </button>
+        <button class="tab" [class.active]="filter === 'active'" (click)="setFilter('active')">
+          Active
+          <span class="tab-pill">{{ activeCount }}</span>
+        </button>
+        <button class="tab" [class.active]="filter === 'done'"   (click)="setFilter('done')">
+          Done
+          <span class="tab-pill">{{ doneCount }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Task list -->
+    <ul class="task-list" *ngIf="filteredTodos.length > 0">
+      <li
+        *ngFor="let todo of filteredTodos; trackBy: trackById"
+        class="task-row"
+        [class.selected]="selectedId === todo.id"
+        [class.completed]="todo.completed"
+        [class.is-deleting]="deletingId === todo.id"
+        (click)="selectTodo(todo)"
+        [@listItem]
+      >
+        <!-- Delete confirm overlay -->
+        <div class="delete-overlay" *ngIf="deletingId === todo.id" (click)="$event.stopPropagation()">
+          <span class="delete-label">Delete this task?</span>
+          <div class="delete-btns">
+            <button class="del-yes" (click)="deleteConfirmed(todo, $event)">Delete</button>
+            <button class="del-no"  (click)="cancelDelete($event)">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Checkbox -->
+        <button
+          class="check"
+          [class.checked]="todo.completed"
+          (click)="toggleComplete(todo, $event)"
+          [title]="todo.completed ? 'Mark incomplete' : 'Mark complete'"
+        >
+          <svg *ngIf="todo.completed" class="check-mark" width="11" height="11"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </button>
+
+        <!-- Text content -->
+        <div class="task-text">
+          <p class="task-title">{{ todo.title }}</p>
+          <p class="task-meta">
+            <span class="task-date">{{ formatDate(todo.updatedAt || todo.createdAt) }}</span>
+            <span class="task-note-preview" *ngIf="todo.note">{{ todo.note }}</span>
+          </p>
+        </div>
+
+        <!-- Delete trigger -->
+        <button
+          class="trash-btn"
+          (click)="confirmDelete(todo.id, $event)"
+          *ngIf="deletingId !== todo.id"
+          title="Delete"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6"/><path d="M14 11v6"/>
+            <path d="M9 6V4h6v2"/>
+          </svg>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Empty sidebar state -->
+    <div class="sidebar-empty" *ngIf="filteredTodos.length === 0">
+      <p>No {{ filter === 'done' ? 'completed' : filter === 'active' ? 'active' : '' }} tasks</p>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════════════════
+       MAIN PANEL
+  ══════════════════════════════════════════ -->
+  <main class="panel">
+
+    <!-- Idle / nothing selected -->
+    <div class="panel-idle" *ngIf="!panelVisible" [@panelFade]>
+      <div class="idle-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </div>
+      <h2 class="idle-title">Select a task to edit</h2>
+      <p class="idle-sub">Or create a new one with the button above</p>
+      <button class="idle-new-btn" (click)="openCreate()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        New Task
+      </button>
+    </div>
+
+    <!-- Edit / Create panel -->
+    <div class="panel-editor" *ngIf="panelVisible" [@panelFade]>
+
+      <!-- Panel toolbar -->
+      <div class="panel-toolbar">
+        <div class="panel-toolbar-left">
+          <span class="panel-mode-label">
+            {{ panelMode === 'create' ? 'New Task' : 'Edit Task' }}
+          </span>
+          <span class="panel-dirty-dot" *ngIf="panelDirty" title="Unsaved changes"></span>
+        </div>
+        <div class="panel-toolbar-right">
+          <button class="toolbar-btn close-btn" (click)="closePanel()" title="Close (Esc)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <button
+            class="toolbar-btn save-btn"
+            (click)="savePanel()"
+            [disabled]="!panelTitle.trim()"
+            title="Save (⌘S)"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <polyline points="17 21 17 13 7 13 7 21"/>
+              <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Save
+          </button>
+        </div>
+      </div>
+
+      <!-- Rule line under toolbar -->
+      <div class="panel-rule"></div>
+
+      <!-- Form fields -->
+      <div class="panel-form">
+        <!-- Date stamp -->
+        <p class="panel-datestamp" *ngIf="selectedTodo">
+          {{ formatDate(selectedTodo.updatedAt || selectedTodo.createdAt) }}
+          <span *ngIf="selectedTodo.completed" class="completed-badge">Completed</span>
+        </p>
+        <p class="panel-datestamp" *ngIf="!selectedTodo">Just now</p>
+
+        <!-- Title -->
+        <textarea
+          #panelTitleInput
+          class="field-title"
+          placeholder="Task title…"
+          [(ngModel)]="panelTitle"
+          (input)="onPanelInput()"
+          rows="2"
+          maxlength="200"
+          (keydown.enter)="$event.preventDefault()"
+        ></textarea>
+
+        <!-- Divider -->
+        <div class="field-divider"></div>
+
+        <!-- Note -->
+        <textarea
+          class="field-note"
+          placeholder="Add a note…"
+          [(ngModel)]="panelNote"
+          (input)="onPanelInput()"
+          rows="14"
+          maxlength="2000"
+        ></textarea>
+
+        <!-- Error -->
+        <p class="panel-error" *ngIf="panelError">{{ panelError }}</p>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
