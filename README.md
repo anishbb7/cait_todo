@@ -1,6 +1,6 @@
 # Notes — Angular To-Do App
 
-An iPhone Notes-inspired task manager built with Angular 17.
+An iPhone Notes-inspired task manager built with Angular 21.
 ![img.png](img.png)
 ## Quick Start
 
