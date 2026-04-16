@@ -1,7 +1,7 @@
 # Notes — Angular To-Do App
 
 A macOS Notes-inspired task manager built with Angular 21.
-![img.png](src\assets\image\img.png)
+![img.png](src/assets/image/img.png)
 ## Quick Start
 
 ```bash
