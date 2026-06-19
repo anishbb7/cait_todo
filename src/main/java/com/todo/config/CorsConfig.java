@@ -14,7 +14,7 @@ public class CorsConfig {
 
     /**
      * Comma-separated list of allowed origins from application.properties.
-     * Default: http://localhost:4200 (Angular dev server).
+     * Default: <a href="http://localhost:4200">http://localhost:4200</a> (Angular dev server).
      */
     @Value("${app.cors.allowed-origins:http://localhost:4200}")
     private List<String> allowedOrigins;
