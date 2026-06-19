@@ -11,9 +11,9 @@ A macOS Notes-inspired task manager — Angular 21 frontend, Spring Boot 3 backe
 | Layer        | Technology                  |
 |--------------|-----------------------------|
 | Frontend     | Angular 21 (Standalone)     |
-| Backend      | Spring Boot 3.2, Java 21    |
+| Backend      | Spring Boot 4.1, Java 17    |
 | Persistence  | Spring Data JPA + Hibernate |
-| Database     | MySQL 8+                    |
+| Database     | MySQL 8.0                   |
 | Validation   | Jakarta Bean Validation     |
 | Boilerplate  | Lombok                      |
 
