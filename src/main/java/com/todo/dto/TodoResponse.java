@@ -1,6 +1,6 @@
 package com.todo.dto;
 
-import com.notes.todo.entity.Todo;
+import com.todo.entity.Todo;
 import lombok.Getter;
 
 import java.time.Instant;

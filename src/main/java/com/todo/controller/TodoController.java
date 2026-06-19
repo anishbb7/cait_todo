@@ -1,9 +1,9 @@
 package com.todo.controller;
 
-import com.notes.todo.dto.CreateTodoDto;
-import com.notes.todo.dto.TodoResponse;
-import com.notes.todo.dto.UpdateTodoDto;
-import com.notes.todo.service.TodoService;
+import com.todo.dto.CreateTodoDto;
+import com.todo.dto.TodoResponse;
+import com.todo.dto.UpdateTodoDto;
+import com.todo.service.TodoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

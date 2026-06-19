@@ -1,11 +1,11 @@
 package com.todo.service;
 
-import com.notes.todo.dto.CreateTodoDto;
-import com.notes.todo.dto.TodoResponse;
-import com.notes.todo.dto.UpdateTodoDto;
-import com.notes.todo.entity.Todo;
-import com.notes.todo.exception.TodoNotFoundException;
-import com.notes.todo.repository.TodoRepository;
+import com.todo.dto.CreateTodoDto;
+import com.todo.dto.TodoResponse;
+import com.todo.dto.UpdateTodoDto;
+import com.todo.entity.Todo;
+import com.todo.exception.TodoNotFoundException;
+import com.todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
