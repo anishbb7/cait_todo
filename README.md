@@ -77,7 +77,7 @@ Both servers must be running simultaneously. Open two terminals.
 
 ```sql
 -- In your MySQL client:
-CREATE DATABASE notes_todo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE notes_todo;
 ```
 
 Or run the included script:
