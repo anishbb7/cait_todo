@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Todo, CreateTodoDto, UpdateTodoDto } from './todo.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private readonly API_URL = 'http://localhost:3000/api/todos';
+  private readonly API_URL = 'http://localhost:8080/api/todos';
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -28,7 +28,7 @@ export class TodoService {
     );
   }
 
-  /** PATCH /api/todos/:id — update a task */
+  /** PATCH /api/todos/:id — update title and/or note */
   update(id: number | string, dto: UpdateTodoDto): Observable<Todo> {
     return this.http.patch<Todo>(`${this.API_URL}/${id}`, dto, { headers: this.headers }).pipe(
       catchError(this.handleError)
@@ -46,7 +46,7 @@ export class TodoService {
     );
   }
 
-  /** DELETE /api/todos/:id — delete a task */
+  /** DELETE /api/todos/:id — remove a task */
   delete(id: number | string): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${id}`).pipe(
       catchError(this.handleError)

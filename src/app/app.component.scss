@@ -1,3 +1,9 @@
+/* ===========================
+   Component — Desktop Notes
+   =========================== */
+
+// ── Layout shell ────────────────────────────────────────────────────────
+
 .workspace {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -6,6 +12,7 @@
   background: var(--bg-primary);
 }
 
+// ── Sidebar ─────────────────────────────────────────────────────────────
 
 .sidebar {
   display: flex;
@@ -31,7 +38,7 @@
 }
 
 .app-title {
-  font-family: var(--font-display),serif;
+  font-family: var(--font-display);
   font-size: 26px;
   font-weight: 600;
   letter-spacing: -0.4px;
@@ -43,7 +50,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   color: #7a5500;
@@ -63,6 +70,7 @@
   &:active { transform: scale(0.97); }
 }
 
+// Filter tabs
 .filter-tabs {
   display: flex;
   gap: 2px;
@@ -78,7 +86,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 12.5px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -113,6 +121,8 @@
     color: #6b4900;
   }
 }
+
+// ── Task list ────────────────────────────────────────────────────────────
 
 .task-list {
   list-style: none;
@@ -158,8 +168,13 @@
       color: var(--text-tertiary);
     }
   }
+
+  &.is-deleting {
+    background: #fff0f0;
+  }
 }
 
+// Checkbox
 .check {
   width: 20px;
   height: 20px;
@@ -232,6 +247,7 @@
   }
 }
 
+// Trash button
 .trash-btn {
   opacity: 0;
   border: none;
@@ -252,6 +268,7 @@
   }
 }
 
+// Delete confirm overlay
 .delete-overlay {
   position: absolute;
   inset: 0;
@@ -272,13 +289,13 @@
   flex: 1;
 }
 
-.delete-buttons {
+.delete-btns {
   display: flex;
   gap: 6px;
 }
 
 .del-yes, .del-no {
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
   padding: 5px 10px;
@@ -300,6 +317,7 @@
   color: var(--text-secondary);
 }
 
+// Sidebar empty state
 .sidebar-empty {
   flex: 1;
   display: flex;
@@ -313,6 +331,8 @@
   }
 }
 
+// ── Main panel ───────────────────────────────────────────────────────────
+
 .panel {
   display: flex;
   flex-direction: column;
@@ -322,6 +342,7 @@
   position: relative;
 }
 
+// Idle state
 .panel-idle {
   flex: 1;
   display: flex;
@@ -346,10 +367,15 @@
 }
 
 .idle-title {
-  font-family: var(--font-display),serif;
+  font-family: var(--font-display);
   font-size: 20px;
   font-weight: 500;
   color: var(--text-secondary);
+}
+
+.idle-sub {
+  font-size: 13.5px;
+  color: var(--text-tertiary);
 }
 
 .idle-new-btn {
@@ -357,7 +383,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 13.5px;
   font-weight: 600;
   color: #7a5500;
@@ -374,6 +400,7 @@
   }
 }
 
+// Editor
 .panel-editor {
   flex: 1;
   display: flex;
@@ -381,6 +408,7 @@
   overflow: hidden;
 }
 
+// Toolbar
 .panel-toolbar {
   display: flex;
   align-items: center;
@@ -396,7 +424,7 @@
 }
 
 .panel-mode-label {
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -422,7 +450,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
   border: none;
@@ -465,6 +493,7 @@
   flex-shrink: 0;
 }
 
+// Form
 .panel-form {
   flex: 1;
   padding: 28px 32px 32px;
@@ -497,7 +526,7 @@
   width: 100%;
   border: none;
   background: transparent;
-  font-family: var(--font-display),serif;
+  font-family: var(--font-display);
   font-size: 26px;
   font-weight: 600;
   color: var(--text-primary);
@@ -525,7 +554,7 @@
   width: 100%;
   border: none;
   background: transparent;
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-secondary);
@@ -538,6 +567,142 @@
 }
 
 .panel-error {
+  font-size: 13px;
+  color: #c62828;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: #fff0f0;
+  border-radius: 8px;
+  border-left: 3px solid #e53935;
+  animation: fadeSlideIn 0.2s ease;
+}
+
+// ── Skeleton loading ──────────────────────────────────────────────────────
+
+.skeleton-list {
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 10px;
+  border-radius: 10px;
+  animation: skPulse 1.4s ease-in-out infinite;
+
+  @keyframes skPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.45; }
+  }
+}
+
+.sk-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+.sk-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sk-line {
+  height: 11px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.09);
+  &.wide  { width: 68%; }
+  &.short { width: 38%; }
+}
+
+// ── Load error banner ─────────────────────────────────────────────────────
+
+.load-error {
+  margin: 20px 12px;
+  padding: 14px 16px;
+  background: #fff5f5;
+  border: 1px solid #ffcdd2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  color: #c62828;
+}
+
+.load-error-msg {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #c62828;
+}
+
+.retry-btn {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #c62828;
+  background: rgba(229, 57, 53, 0.1);
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: background var(--transition);
+
+  &:hover { background: rgba(229, 57, 53, 0.18); }
+}
+
+// ── Spinner ───────────────────────────────────────────────────────────────
+
+.btn-spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(120, 85, 0, 0.25);
+  border-top-color: #7a5500;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+
+  &.white {
+    border-color: rgba(255,255,255,0.35);
+    border-top-color: #fff;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Toggle in-flight ──────────────────────────────────────────────────────
+
+.check.spinning {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+// ── Saving label in toolbar ───────────────────────────────────────────────
+
+.panel-saving-label {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  animation: fadeIn 0.2s ease;
+}
+
+// ── Panel error with icon ─────────────────────────────────────────────────
+
+.panel-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-size: 13px;
   color: #c62828;
   margin-top: 12px;
