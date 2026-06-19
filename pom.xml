@@ -15,7 +15,7 @@
 
   <groupId>com.notes</groupId>
   <artifactId>todo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>notes-todo</name>
   <description>Notes-style To-Do API — Spring Boot + MySQL</description>
 
