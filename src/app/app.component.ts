@@ -260,11 +260,11 @@ export class AppComponent implements OnInit {
     if (!date) return '';
     const d    = new Date(date);
     const diff = Date.now() - d.getTime();
-    if (diff < 60_000)          return 'Just now';
-    if (diff < 3_600_000)       return `${Math.floor(diff / 60_000)}m ago`;
-    if (diff < 86_400_000)      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    if (diff < 7 * 86_400_000)  return d.toLocaleDateString([], { weekday: 'long' });
-    return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+    if (diff < 60_000)          return 'Just now'; // < 1 minute
+    if (diff < 3_600_000)       return `${Math.floor(diff / 60_000)}m ago`; // < 1 hour = {n}m ago
+    if (diff < 86_400_000)      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); //< 1 day, Translate to local time
+    if (diff < 7 * 86_400_000)  return d.toLocaleDateString([], { weekday: 'long' }); // < 7 days, translate to name of day
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }); // else return normal format
   }
 
   trackById(_: number, todo: Todo): number | string { return todo.id; }

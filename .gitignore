@@ -1,6 +1,9 @@
 /.angular/
 /.idea/
+/.kiro
+/.vscode
 /node_modules/
 /package-lock.json
 /target/
 /todo.iml
+/dist/
